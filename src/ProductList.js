@@ -12,7 +12,7 @@ export default function ProductList() {
     useEffect(()=>{
         fetch("https://chanyinwing.github.io/demoapi/react-basic-product.json")
         .then(res=>res.json())
-        .then(data=>console.log(setProductList(data)))
+        .then(data=>setProductList(data))
     },[])
 
 
