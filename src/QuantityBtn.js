@@ -4,7 +4,8 @@ import { CartContext } from './CartContext'
 
 
 export default function QuantityBtn({productInfo}) {
-    const {cartItems, setCartItems} =useContext(CartContext)
+
+    const {cartItems, setCartItems} = useContext(CartContext)
 
     let productIndexInCart = cartItems.findIndex((element) => {
         return element.id === productInfo.id
@@ -17,15 +18,17 @@ export default function QuantityBtn({productInfo}) {
     )
 
     const handleAdd = ()=>{
-        if(productIndexInCart === -1){
+
+        if(productIndexInCart === -1)
+        {
             setCartItems(
                 [{
-                    id:productInfo.id, 
-                    name:productInfo.name, 
-                    price:productInfo.price, 
-                    image:productInfo.image, 
-                    description:productInfo.description,
-                    quantity:1
+                    id : productInfo.id, 
+                    name : productInfo.name, 
+                    image : productInfo.image, 
+                    price : productInfo.price, 
+                    description : productInfo.description,
+                    quantity : 1
                 },
                 ...cartItems])}
         else{
@@ -53,14 +56,14 @@ export default function QuantityBtn({productInfo}) {
     }
 
   return (
-    <div> {cartItems}
-        {
+    <div className='addToCart'> 
+        { 
             (numInCart===0) ?
-            <div onClick={handleAdd}>Add {productInfo.name} to Cart</div> :
+            <span className='addToCartBtn' onClick={handleAdd}>Add to Cart</span> :
             <div>
-                <span onClick={handleSubtract}>-</span>
+                <span className="subtractBtn" onClick={handleSubtract}>-</span>
                 {numInCart}
-                <span onClick={handleAdd}>+123</span>
+                <span className="addBtn" onClick={handleAdd}>+</span>
             </div>
         }
     </div>

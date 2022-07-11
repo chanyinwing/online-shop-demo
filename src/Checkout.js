@@ -1,34 +1,15 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Title from './Title'
 import {Link} from 'react-router-dom'
 import QuantityBtn from './QuantityBtn'
+import { CartContext } from './CartContext'
 
 export default function Checkout() {
 
-  let cartItem = 
-  {
-    "cartItems": 
-    [
-      {
-        "id":5, 
-        "name":"Blueberry", 
-        "price":"10", 
-        "image":"blueberry.jpg", 
-        "description":"Fresh blueberry 50g, Help protect you eyes",
-        "quantity":3
-      }, 
-      {
-        "id":4, 
-        "name":"Watermelon", 
-        "price":"20", 
-        "image":"watermelon.jpg", 
-        "description":"Fresh watermelon 2kg, Make you cool in summer",
-        "quantity": 6
-      }
-    ]
-  }
-
+  let cartItem = useContext(CartContext)
   let {cartItems} = cartItem
+  //可用destructuring直接一句過 let{cartItems} = useContext(CartContext)
+
   let cartEmpty = cartItems.length<=0 ? true : false
   let grandTotal = cartItems.reduce((total, product)=>{
     return total + product.price*product.quantity
@@ -40,9 +21,9 @@ export default function Checkout() {
 
         {
           cartEmpty &&
-          <div>
+          <div className='nothingInCart'>
             It seems you haven't picked up anything yet <br/>
-            <Link to="/">Back to Product List</Link>
+              <Link to="/">Back to Product List</Link>
           </div>
         
         }
@@ -50,19 +31,38 @@ export default function Checkout() {
         {
           !cartEmpty &&
           <div>
-            <div id="cartSection">
-              {/* 產品列表 */
-              cartItems.map(product=>(
-                <div key={product.id}>
-                  <img src={process.env.PUBLIC_URL + "/img/" + product.image}/><br/>
-                  {product.name}<br/>
-                  {product.description}<br/>
-                  Price: {product.price}<br/>
-                  Quantity: {product.quantity}
-                  <QuantityBtn/>
-                </div>
-              ))}
-            </div>
+            <div classNmae="container">
+              <div id="cartSection">
+                <table className="checkoutTable">
+                  <tbody>
+                    {
+                      cartItems.map(product=>(
+                        <tr key={product.id}>
+                          <td>
+                            <Link to={"/product/"+product.id}>
+                              <img src={process.env.PUBLIC_URL + "/img/" + product.image} alt={product.name}/>
+                            </Link>
+                          </td>
+                          <td>
+                            <p>Product Name: {product.name}</p>
+                            <p>Description: {product.description}</p>
+                            <p>Price: ${product.price}</p>
+                          </td>
+                          <td width="200">
+                            <QuantityBtn productInfo={product}/>
+                          </td>
+                          <td>
+                            <div className="productSubTotal">
+                              ${product.price*product.quantity}
+                            </div>
+                          </td>
+                        </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            
+
             <div id="checkOutSection">
               {
                 /*Total Price */
@@ -80,6 +80,7 @@ export default function Checkout() {
                     Only need {freeShippingPrice - grandTotal} more
                   </div>
               }
+            </div>
             </div>
           </div>
         }

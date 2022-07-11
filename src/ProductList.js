@@ -1,6 +1,5 @@
 import {Link} from 'react-router-dom'
 import React from 'react'
-import styles from './ProductList.module.css'
 import Title from './Title'
 import { useState, useEffect } from 'react'
 import QuantityBtn from './QuantityBtn'
@@ -22,11 +21,11 @@ export default function ProductList() {
         <div>
             {
                 productList.map(product =>(
-                    <div className={styles.productBorder} key={product.id}>
+                    <div className="containerItem" key={product.id}>
                         {product.name}<br/>
                         {product.price}<br/>
                         <Link to={"/product/" + product.id}>
-                            <img src={process.env.PUBLIC_URL + "/img/"+product.image}/>
+                            <img src={process.env.PUBLIC_URL + "/img/"+product.image} alt={product.name}/>
                         </Link>
                         <br/>
                         {product.description}<br/>
