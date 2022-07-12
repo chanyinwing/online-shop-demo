@@ -35,7 +35,7 @@ body{
   .addToCart{
     display: block;
     width: 80%;
-    margin: 30px auto;
+    margin: 25px auto;
     font-size: 20px;
     font-weight: bold;
     -webkit-user-select: none;
@@ -96,6 +96,7 @@ body{
     width: 1000px;
     font-size: 20px;
     font-weight: bold;
+    line-height: 150%;
   }
   .ProductDetail img{
     width: 350px;
