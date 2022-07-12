@@ -18,15 +18,16 @@ export default function ProductList() {
   return (
     <div>
         <Title mainTitle="Please Choose The Products You Want"/>
-        <div>
+        <div className='container'>
             {
                 productList.map(product =>(
                     <div className="containerItem" key={product.id}>
-                        {product.name}<br/>
-                        {product.price}<br/>
                         <Link to={"/product/" + product.id}>
                             <img src={process.env.PUBLIC_URL + "/img/"+product.image} alt={product.name}/>
-                        </Link>
+                        </Link>            
+                        <p>Name: {product.name}</p>
+                        Price: {product.price}<br/>
+
                         <br/>
                         {product.description}<br/>
                         <QuantityBtn productInfo={product}/>

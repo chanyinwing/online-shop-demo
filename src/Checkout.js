@@ -15,24 +15,27 @@ export default function Checkout() {
     return total + product.price*product.quantity
   },0)
   let freeShippingPrice = 99
+
+
   return (
-    <div>
+    <>
         <Title mainTitle="Checkout"/>
 
         {
           cartEmpty &&
-          <div className='nothingInCart'>
-            It seems you haven't picked up anything yet <br/>
-              <Link to="/">Back to Product List</Link>
+          <div>
+            <div className='nothingInCart'>
+              It seems you haven't picked up anything yet <br/>
+                <Link to="/">Back to Product List</Link>
+            </div>
           </div>
         
         }
 
         {
           !cartEmpty &&
-          <div>
-            <div classNmae="container">
-              <div id="cartSection">
+            <div className="container">
+              <div className="cartSection">
                 <table className="checkoutTable">
                   <tbody>
                     {
@@ -44,9 +47,9 @@ export default function Checkout() {
                             </Link>
                           </td>
                           <td>
-                            <p>Product Name: {product.name}</p>
-                            <p>Description: {product.description}</p>
+                            <p>Name: {product.name}</p>
                             <p>Price: ${product.price}</p>
+                            <p>Description:<br/>{product.description}</p>
                           </td>
                           <td width="200">
                             <QuantityBtn productInfo={product}/>
@@ -61,29 +64,27 @@ export default function Checkout() {
                   </tbody>
                 </table>
               </div>
-            
+          
+              <div className="checkoutSection">
+          
+                  <div>Total Price: </div>
+                  <div className="grandTotal">${grandTotal}</div>
+                  {
+                    grandTotal >= freeShippingPrice ?
+                    <div className='freeShipping'>Free Shipping!</div> :
+                    <div className='noFreeShipping'>
+                      Free Shipping Over ${freeShippingPrice}<br/>
+                      Only need ${freeShippingPrice - grandTotal} more
+                    </div>
+                  } 
 
-            <div id="checkOutSection">
-              {
-                /*Total Price */
-                <div>
-                  Total Price: {grandTotal}
-                </div>
-              }
-
-              {
-                /* Free Shipping */
-                  grandTotal >= freeShippingPrice ?
-                  <div>Free Shipping!</div> :
-                  <div>
-                    Free Shipping Over ${freeShippingPrice}<br/>
-                    Only need {freeShippingPrice - grandTotal} more
-                  </div>
-              }
+                <button>Checkout</button>
+              </div>
             </div>
-            </div>
-          </div>
+          
         }
-    </div>
+    </>
+
+    
   )
 }
