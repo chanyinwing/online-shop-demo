@@ -84,6 +84,7 @@ body{
     text-align: center;
     color: #FFF;
     text-decoration: none;
+    
   }
   .productName{
     margin-top:15px;
@@ -97,7 +98,7 @@ body{
     font-weight: bold;
   }
   .ProductDetail img{
-    width:350px;
+    width: 350px;
   }
   .ProductDetail td{
     padding : 10px;

@@ -20,20 +20,33 @@ export default function ProductDetail() {
   },[params.id])
 
   return (
-    <div>
+    <div >
       {
         productDetail &&
           <div className='ProductDetail'>
             <Title mainTitle={productDetail.name+" Details"}/>
-            <img src={process.env.PUBLIC_URL + "/img/"+productDetail.image} alt={productDetail.name} width="400px"/>
-            <p>Product Name: {productDetail.name}</p>
-            <p>Price: {productDetail.price}</p>
-            <p>Description: {productDetail.description}</p>
-            <QuantityBtn productInfo={productDetail}/>
 
-            <Link className="backToProductListBtn" to="/">Back to Home Page</Link>
-          </div>
+            <table width="100%">
+              <tbody>
+                <tr>
+                  <td align='right'>
+                    <img src={process.env.PUBLIC_URL + "/img/"+productDetail.image} alt={productDetail.name} width="400px"/>
+                  </td>
+                  <td width="45%" padding="10">
+                    Name: {productDetail.name}<br/>
+                    Price: {productDetail.price}<br/>
+                    Description: {productDetail.description}<br/>
+                    <QuantityBtn productInfo={productDetail}/>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+         </div>
       }
-    </div>
+
+        <Link to="/">
+          <div className="backToProductListBtn">Back to Home Page</div>
+        </Link>    
+      </div>
   )
 }
